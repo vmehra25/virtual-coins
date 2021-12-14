@@ -1,0 +1,6 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+../src/Storage/Coins
+../src/Storage/private/*
+../src/Storage/public/*
