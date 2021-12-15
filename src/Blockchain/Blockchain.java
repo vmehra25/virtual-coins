@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -87,7 +88,7 @@ public class Blockchain {
         for(PayloadTransaction payloadTransaction: encryptedTransactions) {
             int clientId = payloadTransaction.getSenderId();
             byte[] encryptedTransaction = payloadTransaction.getEncryptedTransaction();
-            PrivateKey key = FileUtil.getDecryptionKey(clientId);
+            PublicKey key = FileUtil.getDecryptionKey(clientId);
             try {
                 String trans = FileUtil.decrypt(encryptedTransaction, key);
                 String[] data = trans.split(" ");

@@ -86,7 +86,7 @@ public class Client implements Callable<PayloadTransaction> {
         int randomSleeptime = (int)(random.nextDouble() * 5.0);
         randomSleeptime *= 1000;
         String plainTransaction = clientId + " " + otherClient + " " + coins;
-        byte[] encryptedTransaction = FileUtil.encrypt(plainTransaction, publicKey);
+        byte[] encryptedTransaction = FileUtil.encrypt(plainTransaction, privateKey);
         Thread.sleep(randomSleeptime);
         return new PayloadTransaction(encryptedTransaction, clientId);
     }
