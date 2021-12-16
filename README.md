@@ -38,6 +38,9 @@ Here's why:
 
 ### Sample Output
 
+![First Block](./src/screenshots/FirstBlock.png)
+![Other output](./src/screenshots/Sample.png)
+
 ### Built With
 
 * [Java](https://www.java.com/en/)
