@@ -1,3 +1,6 @@
 idea/shelf/
 idea/workspace.xml
 out
+src/Storage/Coins
+src/Storage/private
+src/Storage/public

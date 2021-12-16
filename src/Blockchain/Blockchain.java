@@ -54,6 +54,7 @@ public class Blockchain {
         for(int i = 1 ; i < numBlocks ; i++){
             List<PayloadTransaction> encryptedTransactions = Client.retrieveTransactions();
             List<Transaction> transactionsList = getDecryptedTransactions(encryptedTransactions);
+            transactionsList = approveValidTransactions(transactionsList);
             minedBlock = null;
             Client.invoke();
             startTime = System.currentTimeMillis();
@@ -69,6 +70,21 @@ public class Blockchain {
             }
         }
 
+    }
+
+    private List<Transaction> approveValidTransactions(List<Transaction> transactionsList) {
+        List<Transaction> list = new ArrayList<Transaction>();
+        for (Transaction transaction: transactionsList){
+            String senderId = transaction.getSenderId();
+            String recieverId = transaction.getReceiverId();
+            int rid = Integer.parseInt(recieverId);
+            int coins = transaction.getCoins();
+            int balance = FileUtil.getBalance(senderId);
+            if(balance >= coins && rid >= 1 && rid <= FileUtil.NUM_MINERS) {
+                list.add(transaction);
+            }
+        }
+        return list;
     }
 
     private void updateZeroCount(long diff) {
@@ -106,8 +122,8 @@ public class Blockchain {
     }
 
     private void updateBalance(String clientId, int coins) {
-        String curPath = System.getProperty("user.dir") + "/src";
-        String folderName = "Storage/Coins";
+        String curPath = FileUtil.getStorage();
+        String folderName = "/Coins";
         String clientBalanceFile = "client" + clientId + ".txt";
         String filePath = curPath + "/" + folderName + "/" + clientBalanceFile;
 

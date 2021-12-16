@@ -13,10 +13,13 @@ import static Util.FileUtil.generateKeyValuePairs;
 
 public class Main {
 
+    public static final int NUM_BLOCKS = 10;
+    public static final int ZERO_COUNT = 4;
+
     public static void main(String[] args) {
         initializeAll();
         Blockchain blockchain = new Blockchain();
-        blockchain.addBlocks(10, 4);
+        blockchain.addBlocks(NUM_BLOCKS, ZERO_COUNT);
         System.exit(0);
     }
 

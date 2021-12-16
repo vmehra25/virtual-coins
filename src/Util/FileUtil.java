@@ -1,9 +1,7 @@
 package Util;
 
 import javax.crypto.Cipher;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,8 +10,10 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
+import static java.lang.Integer.parseInt;
+
 public class FileUtil {
-    private static final int NUM_MINERS = 16;
+    public static final int NUM_MINERS = 16;
 
     public static String getPublicKeyPath(int clientID) {
         return getPublicFolder() + "/Client" + clientID;
@@ -108,5 +108,33 @@ public class FileUtil {
         } catch (NoSuchAlgorithmException | IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static int getBalance(String clientId) {
+        String path = getStorage() + "/Coins/client" + clientId + ".txt";
+        File file = new File(path);
+        if(!file.exists() || !file.isFile()){
+            return 0;
+        }
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(path);
+            int ch;
+            StringBuilder sb = new StringBuilder();
+            while ((ch = fileReader.read()) != -1){
+                sb.append((char)ch);
+            }
+            fileReader.close();
+            int balance = 0;
+            if(sb.length() == 0){
+                balance = 0;
+            } else {
+                balance = parseInt(sb.toString());
+            }
+            return balance;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }
