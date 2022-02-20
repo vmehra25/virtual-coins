@@ -73,13 +73,13 @@ public class FileUtil {
         String publicPath = FileUtil.getPublicFolder();
         String privatePath = FileUtil.getPrivateFolder();
         File publicDir = new File(publicPath);
-        boolean isCreated = publicDir.mkdir();
+        boolean isCreated = publicDir.mkdirs();
         File privateDir = new File(privatePath);
-        isCreated = isCreated && privateDir.mkdir();
+        isCreated = isCreated && privateDir.mkdirs();
 
         String CoinsFolder = FileUtil.getStorage() + "/Coins";
         File coinsFolder = new File(CoinsFolder);
-        isCreated = coinsFolder.mkdir();
+        isCreated = coinsFolder.mkdirs();
         return (publicDir.exists() && privateDir.exists() && coinsFolder.exists());
     }
 
