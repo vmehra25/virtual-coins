@@ -1,6 +1,7 @@
 package Miner;
 
 import Blockchain.Block;
+import Util.Constants;
 import Util.Hash;
 
 import java.util.Random;
@@ -10,7 +11,6 @@ public class Miner implements Callable<Block> {
     private int id;
     private Block block;
     private int zeros;
-    private final int randomBound = 100_000_000;
 
     public Miner(int id, Block block, int zeros) {
         this.id = id;
@@ -24,7 +24,7 @@ public class Miner implements Callable<Block> {
         String candidateHash = "";
         Block guess = new Block(""+id, block.getTimeStamp(), block.getId(), block.getHashOfPrevBlock(),0,block.getTransactionsList());
         do {
-            int magicNum = random.nextInt(randomBound);
+            int magicNum = random.nextInt(Constants.RANDOM_BOUND);
             guess.setMagicNumber(magicNum);
             candidateHash = guess.getBlockHash();
         } while(!Hash.checkHashHasValidZeros(candidateHash, zeros));

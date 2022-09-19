@@ -1,6 +1,7 @@
 package Miner;
 
 import Transaction.PayloadTransaction;
+import Util.Constants;
 import Util.FileUtil;
 
 import java.io.File;
@@ -23,7 +24,6 @@ import java.util.concurrent.*;
 
 public class Client implements Callable<PayloadTransaction> {
     private final int clientId;
-    public static final int NUM_CLIENTS = 16;
     private static CompletionService<PayloadTransaction> currentService;
     private static ExecutorService executorService;
     private PrivateKey privateKey;
@@ -56,7 +56,7 @@ public class Client implements Callable<PayloadTransaction> {
         CompletionService<PayloadTransaction> completionService = new ExecutorCompletionService<>(service);
         currentService = completionService;
         executorService = service;
-        for(int i = 0 ; i < NUM_CLIENTS ; i++){
+        for(int i = 0; i < Constants.NUM_CLIENT ; i++){
             completionService.submit(new Client(i+1));
         }
     }

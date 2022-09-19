@@ -6,13 +6,13 @@ import Transaction.Transaction;
 import Transaction.PayloadTransaction;
 import Util.BlockChainUtility;
 import Util.FileUtil;
+import Util.Constants;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Date;
@@ -80,7 +80,7 @@ public class Blockchain {
             int rid = Integer.parseInt(recieverId);
             int coins = transaction.getCoins();
             int balance = FileUtil.getBalance(senderId);
-            if(balance >= coins && rid >= 1 && rid <= FileUtil.NUM_MINERS) {
+            if(balance >= coins && rid >= 1 && rid <= Constants.NUM_MINERS) {
                 list.add(transaction);
             }
         }
