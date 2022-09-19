@@ -7,13 +7,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 import static java.lang.Integer.parseInt;
 
 public class FileUtil {
-    public static final int NUM_MINERS = 16;
 
     public static String getPublicKeyPath(int clientID) {
         return getPublicFolder() + "/Client" + clientID;
@@ -85,7 +83,7 @@ public class FileUtil {
 
     public static void generateKeyValuePairs() {
         try {
-            for(int i = 1 ; i <= NUM_MINERS ; i++) {
+            for(int i = 1 ; i <= Constants.NUM_MINERS ; i++) {
                 SecureRandom secureRandom = new SecureRandom();
                 KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
                 kpg.initialize(2048, secureRandom);
